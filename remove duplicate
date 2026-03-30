@@ -1,0 +1,26 @@
+import java.util.*;
+
+public class RemoveDuplicates {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 1, 2, 2, 3, 4, 4, 5));
+
+        List<Integer> result = removeDuplicates(list);
+
+        System.out.println(result);
+    }
+
+    public static List<Integer> removeDuplicates(List<Integer> list) {
+        if (list.isEmpty()) return list;
+
+        List<Integer> uniqueList = new ArrayList<>();
+        uniqueList.add(list.get(0));
+
+        for (int i = 1; i < list.size(); i++) {
+            if (!list.get(i).equals(list.get(i - 1))) {
+                uniqueList.add(list.get(i));
+            }
+        }
+
+        return uniqueList;
+    }
+}
