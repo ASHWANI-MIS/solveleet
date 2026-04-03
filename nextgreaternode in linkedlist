@@ -1,0 +1,33 @@
+class Solution {
+    public int[] nextLargerNodes(ListNode head) {
+
+        // Step 1: Convert Linked List to ArrayList
+        List<Integer> list = new ArrayList<>();
+        ListNode temp = head;
+
+        while (temp != null) {
+            list.add(temp.val);
+            temp = temp.next;
+        }
+
+        int n = list.size();
+        int[] result = new int[n];
+
+        // Step 2: Stack to store indices
+        Stack<Integer> stack = new Stack<>();
+
+        // Step 3: Traverse array
+        for (int i = 0; i < n; i++) {
+
+            while (!stack.isEmpty() && list.get(i) > list.get(stack.peek())) {
+                int idx = stack.pop();
+                result[idx] = list.get(i);
+            }
+
+            stack.push(i);
+        }
+
+        // Remaining elements already 0 by default
+        return result;
+    }
+}
