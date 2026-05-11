@@ -1,0 +1,37 @@
+class Solution {
+    int cameras = 0;
+
+    public int minCameraCover(TreeNode root) {
+        // if root is not covered, put camera on root
+        if (dfs(root) == 0) {
+            cameras++;
+        }
+
+        return cameras;
+    }
+
+    private int dfs(TreeNode node) {
+        // null node is already covered
+        if (node == null) {
+            return 2;
+        }
+
+        int left = dfs(node.left);
+        int right = dfs(node.right);
+
+        // if any child is not covered, place camera here
+        if (left == 0 || right == 0) {
+            cameras++;
+            return 1;
+        }
+
+        // if any child has camera, current node is covered
+        if (left == 1 || right == 1) {
+            return 2;
+        }
+
+        // both children are covered but no camera
+        // so current node is not covered
+        return 0;
+    }
+}binarb 
