@@ -1,0 +1,23 @@
+class Solution {
+    TreeNode prev = null;
+
+    public void flatten(TreeNode root) {
+        
+        if (root == null) {
+            return;
+        }
+
+        // process right subtree first
+        flatten(root.right);
+
+        // process left subtree
+        flatten(root.left);
+
+        // make current node point to previous node
+        root.right = prev;
+        root.left = null;
+
+        // move prev to current node
+        prev = root;
+    }
+}
